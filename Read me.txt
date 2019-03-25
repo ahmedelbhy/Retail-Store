@@ -1,0 +1,4 @@
+# Maven Build
+ cd to pom work directory and run 
+ mvnw.cmd clean package
+ 
