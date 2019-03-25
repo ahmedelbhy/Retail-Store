@@ -6,7 +6,8 @@
 	<artifactId>retail.store.discount</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<dependencies><!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
