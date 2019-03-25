@@ -6,7 +6,7 @@ import retial.store.dataModel.PurchaseObject;
 import retial.store.dataModel.User;
 import retial.store.dataModel.UserTypes;
 
-public class retailStoreBills {
+public class UserRetailStoreBills {
 
 	public static void main(String[] args) throws Exception {
 		List<PurchaseObject> userCart = CalculateRetialUsersDiscount.getUserShoppingCart();
