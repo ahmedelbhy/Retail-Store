@@ -5,23 +5,17 @@ import java.util.Date;
 public class ElectronicDevice implements PurchaseObject {
 	private String productName;
 	private String deviceCategory;
-	private Date produceingDate;
+	private Date producingDate;
 	private double price;
 
-	public String getDeviceCategory() {
-		return deviceCategory;
+	@Override
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setDeviceCategory(String deviceCategory) {
-		this.deviceCategory = deviceCategory;
-	}
-
-	public Date getProduceingDate() {
-		return produceingDate;
-	}
-
-	public void setProduceingDate(Date produceingDate) {
-		this.produceingDate = produceingDate;
+	@Override
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	@Override
@@ -32,15 +26,21 @@ public class ElectronicDevice implements PurchaseObject {
 	@Override
 	public void setprice(double price) {
 		this.price = price;
-
 	}
 
-	public String getProductName() {
-		return productName;
+	public String getDeviceCategory() {
+		return deviceCategory;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setDeviceCategory(String deviceCategory) {
+		this.deviceCategory = deviceCategory;
 	}
 
+	public Date getProduceingDate() {
+		return producingDate;
+	}
+
+	public void setProduceingDate(Date produceingDate) {
+		this.producingDate = produceingDate;
+	}
 }

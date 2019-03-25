@@ -4,18 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 public class User {
-	private String fristName;
+	private String firstName;
 	private String lastName;
 	private Date storeJoinDate;
 	private UserTypes userType;
 	private List<PurchaseObject> purchaseObjects;
 
-	public String getFristName() {
-		return fristName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFristName(String fristName) {
-		this.fristName = fristName;
+	public void setfirstName(String fristName) {
+		this.firstName = fristName;
 	}
 
 	public String getLastName() {

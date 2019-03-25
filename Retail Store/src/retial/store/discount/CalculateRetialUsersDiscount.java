@@ -34,15 +34,21 @@ import retial.store.dataModel.UserTypes;
  * showing its quality summary
  */
 public class CalculateRetialUsersDiscount {
-	static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	private SimpleDateFormat dateFormat;
 
-	public static double calculatePrecentageDiscount(User user) {
+	public CalculateRetialUsersDiscount() {
+		dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	}
+
+	/**
+	 * 
+	 * @param user
+	 * @return percentage dicount
+	 */
+	public double calculatePrecentageDiscount(User user) {
 		double discountprecent = 0;
-
 		long yearTimeStamp = 1 * 360 * 24 * 60 * 60;
-
-		if (user != null) {
-
+		if (user != null)
 			switch (user.getUserType()) {
 			case EMPLOYEE:
 				discountprecent = 30;
@@ -51,97 +57,90 @@ public class CalculateRetialUsersDiscount {
 				discountprecent = 10;
 				break;
 			case CUSTOMER:
-				long currentDatetimestamp = Instant.now().getEpochSecond();
-
-				Instant userjoindate = user.getStoreJoinDate().toInstant();
-				long userjoindatetimestamp = userjoindate.getEpochSecond();
-
-				boolean validCustomer = ((currentDatetimestamp - userjoindatetimestamp) / yearTimeStamp) >= 2;
-				if (validCustomer) {
+				long currentDate = Instant.now().getEpochSecond();
+				long userJoinDate = currentDate;
+				if (user.getStoreJoinDate() != null)
+					userJoinDate = user.getStoreJoinDate().toInstant().getEpochSecond();
+				long joinInterval = currentDate - userJoinDate;
+				boolean validCustomer = (joinInterval / yearTimeStamp) >= 2;
+				if (validCustomer)
 					discountprecent = 5;
-				}
 				break;
 			}
-		}
 		return discountprecent;
 	}
 
-	public static List<PurchaseObject> getUserShoppingCart() throws Exception {
-
-		List userCart = new ArrayList<PurchaseObject>();
+	public List<PurchaseObject> getUserShoppingCart() throws Exception {
+		List<PurchaseObject> userCart = new ArrayList<PurchaseObject>();
 		Groceries tom = new Groceries();
 		tom.setProductName("Tomatos");
 		tom.setQuantity(3);
 		tom.setprice(10);
 		userCart.add(tom);
-
 		Groceries rice = new Groceries();
 		rice.setProductName("Rice");
 		rice.setQuantity(5);
 		rice.setprice(60);
 		userCart.add(rice);
-
+		
 		ServersPC xeon = new ServersPC();
 		xeon.setProductName("server Intel");
 		xeon.setServerRamSize(16);
 		xeon.setServerProcessor("XEON");
 		xeon.setprice(20000);
 		userCart.add(xeon);
-
+		
 		ServersPC i7 = new ServersPC();
 		i7.setProductName("Server Oracle");
 		i7.setServerRamSize(32);
 		i7.setServerProcessor("i7");
 		i7.setprice(15000);
 		userCart.add(i7);
-
+		
 		ElectronicDevice device1 = new ElectronicDevice();
 		device1.setProductName("Sumsung j7");
 		device1.setDeviceCategory("A");
-		device1.setProduceingDate(df.parse("2016-05-15"));
+		device1.setProduceingDate(dateFormat.parse("2016-05-15"));
 		device1.setprice(4500);
 		userCart.add(device1);
-
+		
 		ElectronicDevice device2 = new ElectronicDevice();
 		device2.setProductName("Sumsung S10");
 		device2.setDeviceCategory("A");
-		device2.setProduceingDate(df.parse("2019-03-15"));
+		device2.setProduceingDate(dateFormat.parse("2019-03-15"));
 		device2.setprice(15000);
 		userCart.add(device2);
-
 		return userCart;
 	}
 
-	public static double calculateBills(User user) {
+	public double calculateBills(User user) {
 		double userdiscountPrecent = calculatePrecentageDiscount(user);
-
 		double billTotalAmt = 0;
-
 		double electroniceTotalCost = 0;
 		double groceriesTotalCost = 0;
-
 		for (PurchaseObject purchase : user.getPurchaseObjects()) {
-			if (!(purchase instanceof Groceries)) {
+			if (!(purchase instanceof Groceries))
 				electroniceTotalCost += purchase.getprice();
-			} else {
+			else
 				groceriesTotalCost += purchase.getprice();
-			}
 		}
-
 		// Percentage discount
-
 		if (electroniceTotalCost > 0 && userdiscountPrecent > 0) {
-			electroniceTotalCost = electroniceTotalCost - (electroniceTotalCost * (userdiscountPrecent / 100));
+			double dicountAmount = electroniceTotalCost * (userdiscountPrecent / 100);
+			electroniceTotalCost = electroniceTotalCost - dicountAmount;
 		}
-
 		// 100 Dollar Discount
 		billTotalAmt = electroniceTotalCost + groceriesTotalCost;
-
 		int hundredDollarDiscount = ((int) (billTotalAmt / 100)) * 5;
-
 		billTotalAmt = billTotalAmt - hundredDollarDiscount;
-
 		return billTotalAmt;
 	}
 
+	public SimpleDateFormat getDateFormat() {
+		return dateFormat;
+	}
+
+	public void setDateFormat(SimpleDateFormat dateFormat) {
+		this.dateFormat = dateFormat;
+	}
 }

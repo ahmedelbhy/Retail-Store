@@ -9,43 +9,49 @@ import retial.store.dataModel.UserTypes;
 public class UserRetailStoreBills {
 
 	public static void main(String[] args) throws Exception {
-		List<PurchaseObject> userCart = CalculateRetialUsersDiscount.getUserShoppingCart();
+		CalculateRetialUsersDiscount retailUser = new CalculateRetialUsersDiscount();
+
+		List<PurchaseObject> userCart = retailUser.getUserShoppingCart();
 
 		User employee = new User();
-		employee.setFristName("ahmed");
+		employee.setfirstName("ahmed");
 		employee.setLastName("Elbhy");
-		employee.setStoreJoinDate(CalculateRetialUsersDiscount.df.parse("2015-06-01"));
+		employee.setStoreJoinDate(retailUser.getDateFormat().parse("2015-06-01"));
 		employee.setUserType(UserTypes.EMPLOYEE);
 		employee.setPurchaseObjects(userCart);
-
-		System.out.println(CalculateRetialUsersDiscount.calculateBills(employee));
+		System.out.println(retailUser.calculateBills(employee));
 
 		User affiliate = new User();
-		affiliate.setFristName("aml");
+		affiliate.setfirstName("aml");
 		affiliate.setLastName("kamal");
-		affiliate.setStoreJoinDate(CalculateRetialUsersDiscount.df.parse("2017-08-01"));
+		affiliate.setStoreJoinDate(retailUser.getDateFormat().parse("2017-08-01"));
 		affiliate.setUserType(UserTypes.AFFILIATE);
 		affiliate.setPurchaseObjects(userCart);
+		System.out.println(retailUser.calculateBills(affiliate));
 
-		System.out.println(CalculateRetialUsersDiscount.calculateBills(affiliate));
+		User customerJoinRecently = new User();
+		customerJoinRecently.setfirstName("ahmed1");
+		customerJoinRecently.setLastName("Elbhy1");
+		customerJoinRecently.setStoreJoinDate(retailUser.getDateFormat().parse("2019-01-01"));
+		customerJoinRecently.setUserType(UserTypes.CUSTOMER);
+		customerJoinRecently.setPurchaseObjects(userCart);
+		System.out.println(retailUser.calculateBills(customerJoinRecently));
 
-		User customer1 = new User();
-		customer1.setFristName("ahmed1");
-		customer1.setLastName("Elbhy1");
-		customer1.setStoreJoinDate(CalculateRetialUsersDiscount.df.parse("2019-01-01"));
-		customer1.setUserType(UserTypes.CUSTOMER);
-		customer1.setPurchaseObjects(userCart);
-
-		System.out.println(CalculateRetialUsersDiscount.calculateBills(customer1));
-
-		User customer2 = new User();
-		customer2.setFristName("ahmed2");
-		customer2.setLastName("Elbhy1");
-		customer2.setStoreJoinDate(CalculateRetialUsersDiscount.df.parse("2015-06-01"));
-		customer2.setUserType(UserTypes.CUSTOMER);
-		customer2.setPurchaseObjects(userCart);
-
-		System.out.println(CalculateRetialUsersDiscount.calculateBills(customer2));
+		User customerJoinBefore2years = new User();
+		customerJoinBefore2years.setfirstName("ahmed2");
+		customerJoinBefore2years.setLastName("Elbhy1");
+		customerJoinBefore2years.setStoreJoinDate(retailUser.getDateFormat().parse("2015-06-01"));
+		customerJoinBefore2years.setUserType(UserTypes.CUSTOMER);
+		customerJoinBefore2years.setPurchaseObjects(userCart);
+		System.out.println(retailUser.calculateBills(customerJoinBefore2years));
+		
+		User customerWithNullJoinDate = new User();
+		customerWithNullJoinDate.setfirstName("ahmed2");
+		customerWithNullJoinDate.setLastName("Elbhy1");
+		customerWithNullJoinDate.setStoreJoinDate(null);
+		customerWithNullJoinDate.setUserType(UserTypes.CUSTOMER);
+		customerWithNullJoinDate.setPurchaseObjects(userCart);
+		System.out.println(retailUser.calculateBills(customerWithNullJoinDate));
 
 	}
 }
