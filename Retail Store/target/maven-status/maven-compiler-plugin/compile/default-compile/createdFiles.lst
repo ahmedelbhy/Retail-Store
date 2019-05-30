@@ -1,0 +1,9 @@
+retial\store\discount\CalculateRetialUsersDiscount.class
+retial\store\dataModel\ServersPC.class
+retial\store\dataModel\ElectronicDevice.class
+retial\store\dataModel\Groceries.class
+retial\store\discount\CalculateRetialUsersDiscount$1.class
+retial\store\discount\UserRetailStoreBills.class
+retial\store\dataModel\UserTypes.class
+retial\store\dataModel\PurchaseObject.class
+retial\store\dataModel\User.class

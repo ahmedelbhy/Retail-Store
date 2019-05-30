@@ -1,4 +1,12 @@
 # Maven Build
+ 
  cd to pom work directory and run 
+ 
  mvnw.cmd clean package
+ 
+ unit test run 
+ mvn -Dtest=UserRetailBillsAppTest test
+ 
+ create code Coverage
+ mvn clean test
  
